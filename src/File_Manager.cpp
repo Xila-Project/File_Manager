@@ -18,16 +18,12 @@ File_Manager_Class::File_Manager_Class(const Accounts_Types::User_Type *Owner_Us
 
 File_Manager_Class::~File_Manager_Class()
 {
-    Log_Verbose("File manager", "Destructor");
-    Log_Verbose("File manager", "Path: %p", this);
     Window.Delete();
 }
 
 void File_Manager_Class::Set_Interface()
 {
     using namespace Xila::Graphics_Types;
-
-    Log_Verbose("File manager", "File manager software interface initialization");
 
     Window.Create(this);
     Window.Set_Title("File manager");
@@ -169,8 +165,6 @@ void File_Manager_Class::Execute_Instruction(Instruction_Type Instruction)
 {
     if (Instruction.Get_Sender() == &Graphics)
     {
-        Log_Verbose("File manager", "Instruction : %d", Instruction.Graphics.Get_Code());
-
         Graphics_Types::Object_Type Current_Target = Instruction.Graphics.Get_Current_Target();
 
         switch (Instruction.Graphics.Get_Code())
@@ -238,7 +232,6 @@ void File_Manager_Class::Execute_Instruction(Instruction_Type Instruction)
         case Graphics_Types::Event_Code_Type::Value_Changed:
             if (Current_Target == File_Explorer)
             {
-                Log_Verbose("File manager", "File explorer value changed : ", File_Explorer.Get_Path());
                 Path_Text_Area.Set_Text(File_Explorer.Get_Path());
             }
             break;
